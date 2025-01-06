@@ -1,8 +1,8 @@
-    let square3 = document.getElementById("square3");
-    if (square3){
-        square3Position = [parseFloat(square3.style.left),parseFloat(square3.style.top)];
-        look_at(square3,square3Position,square2Position);
-        square2ToSquare3 = Math.sqrt(Math.pow(square3Position[0]-square2Position[0],2)+Math.pow(square3Position[1]-square2Position[1],2));
-        square3.style.left = square2Position[0]+(square3Position[0]-square2Position[0])/square2ToSquare3*50+"px";
-        square3.style.top = square2Position[1]+(square3Position[1]-square2Position[1])/square2ToSquare3*50+"px";
+    let square5 = document.getElementById("square5");
+    if (square5){
+        square5Position = [parseFloat(square5.style.left),parseFloat(square5.style.top)];
+        look_at(square5,square5Position,square4Position);
+        square4ToSquare5 = Math.sqrt(Math.pow(square5Position[0]-square4Position[0],2)+Math.pow(square5Position[1]-square4Position[1],2));
+        square5.style.left = square4Position[0]+(square5Position[0]-square4Position[0])/square4ToSquare5*50+"px";
+        square5.style.top = square4Position[1]+(square5Position[1]-square4Position[1])/square4ToSquare5*50+"px";
     };
