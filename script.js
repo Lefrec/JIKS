@@ -26,7 +26,7 @@ function follow_cursor() {
                 element.style.top = cursorPosition[1] + "px";
             } else {
                 look_at(element, squaresPosition[index], squaresPosition[index - 1])
-                lenght = Math.sqrt(Math.pow(squaresPosition[index][0] - squaresPosition[index - 1][0], 2) + (Math.pow(squaresPosition[index][1] - squaresPosition[index - 1][1], 2)));
+                lenght = Math.sqrt((squaresPosition[index][0] - squaresPosition[index - 1][0])**2 + ((squaresPosition[index][1] - squaresPosition[index - 1][1])**2));
                 element.style.left = squaresPosition[index - 1][0] + (squaresPosition[index][0] - squaresPosition[index - 1][0]) / lenght * 50 + "px";
                 element.style.top = squaresPosition[index - 1][1] + (squaresPosition[index][1] - squaresPosition[index - 1][1]) / lenght * 50 + "px";
 
@@ -40,18 +40,19 @@ function follow_cursor() {
 
 function angleConstraint(index) {
     vectorA = [squaresPosition[index-1][0]-squaresPosition[index][0], squaresPosition[index-1][1]-squaresPosition[index][1]];
-    normA = Math.sqrt(Math.pow(vectorA[0], 2) + Math.pow(vectorA[1], 2));
+    normA = Math.sqrt(vectorA[0]**2 + vectorA[1]**2);
     vectorB = [squaresPosition[index + 1][0] - squaresPosition[index][0], squaresPosition[index+1][1] - squaresPosition[index][1]];
-    normB = Math.sqrt(Math.pow(vectorB[0], 2) + Math.pow(vectorB[1], 2));
+    normB = Math.sqrt(vectorB[0]**2 + vectorB[1]**2);
     vectorAB = [squaresPosition[index + 1][0] - squaresPosition[index - 1][0], squaresPosition[index+1][1] - squaresPosition[index-1][1]];
-    normAB = Math.sqrt(Math.pow(vectorAB[0], 2) + Math.pow(vectorAB[1], 2));
-    preAcos = (1 / 2 * (Math.pow(normAB, 2) - Math.pow(normA, 2) - Math.pow(normB, 2)) / (normA * normB));
+    normAB = Math.sqrt(vectorAB[0]**2 + vectorAB[1]**2);
+    preAcos = (1 / 2 * (normAB**2 - normA**2 - normB**2) / (normA * normB));
     currentAngle = (preAcos+1)*90;
     if (index == 1) {
-        console.log(preAcos+"   "+currentAngle);
+        console.log((vectorA[0]*vectorB[1]-vectorA[1]*vectorB[0]));
     }
     if (currentAngle < minAngle) {
         deltaAngle = (minAngle-currentAngle) *(Math.PI/180);
+        deltaAngle *= Math.sign(vectorA[0]*vectorB[1]-vectorA[1]*vectorB[0]);
         newVectorB = [Math.cos(deltaAngle)*vectorB[0]+(-Math.sin(deltaAngle))*vectorB[1] , Math.sin(deltaAngle)*vectorB[0]+(Math.cos(deltaAngle))*vectorB[1]];
         squares[index+1].style.left = squaresPosition[index][0]+newVectorB[0]+"px";
         squares[index+1].style.top = squaresPosition[index][1]+newVectorB[1]+"px";
