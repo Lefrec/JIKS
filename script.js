@@ -2,7 +2,7 @@ var cursorPosition = [0, 0];
 var squaresPosition = [];
 const minAngle = 75;
 const bodyRange = 50;
-var squareNumber = 20;
+var squareNumber = 5;
 
 var squares = [];
 for ( let i=0; i<squareNumber; i++) {
@@ -74,14 +74,29 @@ function look_at(element, position, target) {
 
 function grow() {
     console.log("growing");
-    document.getElementById("body").innerHTML += 
-    `<div style="
-    position: absolute;
-    height: 10px;
-    width: 10px;
-    top: 0;
-    left: 0;
-    background-color: white;" id="square${squareNumber}">
-    </div>`;
-    squares.push(document.getElementById(`square${squareNumber}`));
+    let square = document.createElement("div");
+    square.style.position = "absolute";
+    square.style.height = "10px";
+    square.style.width = "10px";
+    square.style.top = "0";
+    square.style.left = "0";
+    square.style.backgroundColor = "white";
+    square.id = `square${squareNumber}`;
+    body.appendChild(square);
+    squares.push(square);
+    squareNumber++;
+}
+
+setInterval(spawn_apple, 2000);
+
+function spawn_apple() {
+    console.log("test");
+    let apple = document.createElement("div");
+    apple.style.position = "absolute";
+    apple.style.height = "20px";
+    apple.style.width = "20px";
+    apple.style.top = Math.random()*window.innerHeight+"px";
+    apple.style.left = Math.random()*window.innerWidth+"px";
+    apple.style.backgroundColor = "red";
+    body.appendChild(apple);
 }
