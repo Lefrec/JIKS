@@ -1,7 +1,8 @@
 var cursorPosition = [0, 0];
 var squares = [];
 var squaresPosition = [];
-const minAngle = 90;
+const minAngle = 75;
+const bodyRange = 50;
 
 document.addEventListener("mousemove", getCursor);
 
@@ -27,8 +28,8 @@ function follow_cursor() {
             } else {
                 look_at(element, squaresPosition[index], squaresPosition[index - 1])
                 lenght = Math.sqrt((squaresPosition[index][0] - squaresPosition[index - 1][0])**2 + ((squaresPosition[index][1] - squaresPosition[index - 1][1])**2));
-                element.style.left = squaresPosition[index - 1][0] + (squaresPosition[index][0] - squaresPosition[index - 1][0]) / lenght * 50 + "px";
-                element.style.top = squaresPosition[index - 1][1] + (squaresPosition[index][1] - squaresPosition[index - 1][1]) / lenght * 50 + "px";
+                element.style.left = squaresPosition[index - 1][0] + (squaresPosition[index][0] - squaresPosition[index - 1][0]) / lenght * bodyRange + "px";
+                element.style.top = squaresPosition[index - 1][1] + (squaresPosition[index][1] - squaresPosition[index - 1][1]) / lenght * bodyRange + "px";
 
                 if (squaresPosition[index + 1]) {
                     angleConstraint(index)
@@ -47,9 +48,6 @@ function angleConstraint(index) {
     normAB = Math.sqrt(vectorAB[0]**2 + vectorAB[1]**2);
     preAcos = (1 / 2 * (normAB**2 - normA**2 - normB**2) / (normA * normB));
     currentAngle = (preAcos+1)*90;
-    if (index == 1) {
-        console.log((vectorA[0]*vectorB[1]-vectorA[1]*vectorB[0]));
-    }
     if (currentAngle < minAngle) {
         deltaAngle = (minAngle-currentAngle) *(Math.PI/180);
         deltaAngle *= Math.sign(vectorA[0]*vectorB[1]-vectorA[1]*vectorB[0]);
