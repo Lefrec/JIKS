@@ -16,7 +16,7 @@ function follow_cursor() {
     squaresPosition = [];
     if (squares) {
         squares.forEach(function updateSquare(element, index) {
-            squaresPosition[index] = [parseInt(element.style.left), parseInt(element.style.top)];
+            squaresPosition[index] = [parseFloat(element.style.left), parseFloat(element.style.top)];
             if (index == 0) {
                 look_at(element, squaresPosition[index], cursorPosition)
                 element.style.left = cursorPosition[0]+"px";
@@ -24,7 +24,6 @@ function follow_cursor() {
             } else {
                 look_at(element, squaresPosition[index], squaresPosition[index - 1])
                 lenght = Math.sqrt(Math.pow(squaresPosition[index][0] - squaresPosition[index - 1][0], 2) + (Math.pow(squaresPosition[index][1] - squaresPosition[index - 1][1], 2)));
-                console.log(lenght);
                 element.style.left = squaresPosition[index - 1][0] + (squaresPosition[index][0] - squaresPosition[index - 1][0]) / lenght * 50 + "px";
                 element.style.top = squaresPosition[index - 1][1] + (squaresPosition[index][1] - squaresPosition[index - 1][1]) / lenght * 50 + "px";
             }
