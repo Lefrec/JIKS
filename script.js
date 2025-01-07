@@ -2,7 +2,7 @@ var cursorPosition = [0, 0];
 var squaresPosition = [];
 const minAngle = 75;
 const bodyRange = 50;
-var squareNumber = 5;
+var squareNumber = 20;
 
 var squares = [];
 for ( let i=0; i<squareNumber; i++) {
@@ -87,7 +87,7 @@ function grow() {
     squareNumber++;
 }
 
-setInterval(spawn_apple, 2000);
+//setInterval(spawn_apple, 2000);
 
 function spawn_apple() {
     console.log("test");
