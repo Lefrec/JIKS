@@ -1,8 +1,13 @@
-    let square5 = document.getElementById("square5");
-    if (square5){
-        square5Position = [parseFloat(square5.style.left),parseFloat(square5.style.top)];
-        look_at(square5,square5Position,square4Position);
-        square4ToSquare5 = Math.sqrt(Math.pow(square5Position[0]-square4Position[0],2)+Math.pow(square5Position[1]-square4Position[1],2));
-        square5.style.left = square4Position[0]+(square5Position[0]-square4Position[0])/square4ToSquare5*50+"px";
-        square5.style.top = square4Position[1]+(square5Position[1]-square4Position[1])/square4ToSquare5*50+"px";
-    };
+for ( let i=0; i<squareNumber; i++) {
+    document.getElementById("body").innerHTML += 
+    `<div style="
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    top: 0;
+    left: 0;
+    background-color: white;" id="square${squareNumber}">
+    </div>`;
+    testRay.push(document.getElementById(`square${squareNumber}`));
+    squareNumber++;
+}
