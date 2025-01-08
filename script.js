@@ -2,14 +2,15 @@ var cursorPosition = [0, 0];
 var squaresPosition = [];
 const minAngle = 75;
 const bodyRange = 50;
-var squareNumber = 20;
+var squareNumber = 10;
 
 var squares = [];
 for ( let i=0; i<squareNumber; i++) {
     let square = document.createElement("div");
     square.style.position = "absolute";
-    square.style.height = "10px";
-    square.style.width = "10px";
+    square.style.height = getSquareSize(i);
+    square.style.width = getSquareSize(i);
+    square.style.borderRadius = "50%";
     square.style.top = "0";
     square.style.left = "0";
     square.style.backgroundColor = "white";
@@ -17,6 +18,13 @@ for ( let i=0; i<squareNumber; i++) {
     body.appendChild(square);
     squares.push(square);
 };
+
+function getSquareSize(index, baseSize = 10, amplitude = 2) {
+    const mu = squareNumber / 3;
+    const sigma = squareNumber / 3;
+    return baseSize * (1 + amplitude * Math.exp(-Math.pow((index - mu) / sigma, 2)))+"px";
+  }
+  
 
 document.addEventListener("mousemove", getCursor);
 
@@ -76,8 +84,9 @@ function grow() {
     console.log("growing");
     let square = document.createElement("div");
     square.style.position = "absolute";
-    square.style.height = "10px";
-    square.style.width = "10px";
+    square.style.height = getSquareSize(squareNumber);
+    square.style.width = getSquareSize(squareNumber);
+    square.style.borderRadius = "50%";
     square.style.top = "0";
     square.style.left = "0";
     square.style.backgroundColor = "white";
@@ -85,6 +94,10 @@ function grow() {
     body.appendChild(square);
     squares.push(square);
     squareNumber++;
+    for ( let i=0; i<squareNumber; i++) {
+        squares[i].style.height = getSquareSize(i);
+        squares[i].style.width = getSquareSize(i);
+    };
 }
 
 //setInterval(spawn_apple, 2000);
