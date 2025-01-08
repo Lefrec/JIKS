@@ -1,8 +1,8 @@
 var cursorPosition = [0, 0];
 var squaresPosition = [];
 const minAngle = 75;
-const bodyRange = 50;
-var squareNumber = 10;
+const bodyRange = 20;
+var squareNumber = 20;
 
 var squares = [];
 for ( let i=0; i<squareNumber; i++) {
@@ -24,7 +24,6 @@ function getSquareSize(index, baseSize = 10, amplitude = 2) {
     const sigma = squareNumber / 3;
     return baseSize * (1 + amplitude * Math.exp(-Math.pow((index - mu) / sigma, 2)))+"px";
   }
-  
 
 document.addEventListener("mousemove", getCursor);
 
